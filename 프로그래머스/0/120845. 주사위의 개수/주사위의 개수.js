@@ -1,11 +1,13 @@
 function solution(box, n) {
-    var answer = 0;
+    return box.reduce((acc, val) => acc * Math.floor(val / n), 1)    
+}
+
+/*
+function solution(box, n) {
+    var answer = 1;
     box.forEach(e => {
-        if (answer == 0) {
-            answer = Math.floor(e / n)     
-        } else {
-            answer *= Math.floor(e / n)     
-        }
+        answer *= Math.floor(e / n)     
     })
     return answer;
 }
+*/
