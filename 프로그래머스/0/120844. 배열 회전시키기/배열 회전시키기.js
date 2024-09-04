@@ -1,10 +1,8 @@
 function solution(numbers, direction) {
     if (direction == "left") {
-      var n = numbers.shift()
-      numbers.push(n)
+      numbers.push(numbers.shift())
     } else {
-        numbers.unshift(numbers[numbers.length - 1])
-        numbers.pop()
+      numbers.unshift(numbers.pop())
     }
     return numbers;
 }
