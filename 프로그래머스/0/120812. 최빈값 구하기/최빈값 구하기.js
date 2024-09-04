@@ -1,4 +1,21 @@
 function solution(array) {
+ let m = new Map()
+ 
+ for (let n of array) {
+     m.set(n, (m.get(n) ?? 0) + 1)
+ }
+    
+
+ let arr = [...m].sort((a, b) => b[1] - a[1])
+ 
+ if (arr.length === 1 || arr[0][1] > arr[1][1]) {
+    return arr[0][0]
+ }
+    return -1
+}
+
+/*
+function solution(array) {
     var obj = {}
     
     array.forEach((el) => {
@@ -27,3 +44,4 @@ function solution(array) {
     })
     return count > 1 ? -1 : parseInt(maxKey)
 }
+*/
