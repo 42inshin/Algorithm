@@ -1,4 +1,14 @@
 function solution(n) {
+    var fac = 1; 
+    var i = 1;
+    while (fac * i < n) {
+        fac *= ++i;
+    }
+    return i;
+}
+
+/*
+function solution(n) {
     var fac = 1;
     var i = 0;
     while (fac <= n) {
@@ -7,3 +17,4 @@ function solution(n) {
     }
     return i - 1;
 }
+*/
