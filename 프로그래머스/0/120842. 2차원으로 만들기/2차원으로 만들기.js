@@ -1,4 +1,13 @@
 function solution(num_list, n) {
+    var result = []
+    while (num_list.length) {
+        result.push(num_list.splice(0,n))
+    }
+    return result
+}
+
+/*
+function solution(num_list, n) {
     var answer = [];
     var tempArr = [];
     for (let i = 0; i < num_list.length; i++) {
@@ -12,3 +21,4 @@ function solution(num_list, n) {
     
     return answer;
 }
+*/
