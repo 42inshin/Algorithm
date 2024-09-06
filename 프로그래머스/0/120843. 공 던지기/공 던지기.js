@@ -1,3 +1,4 @@
+/*
 function solution(numbers, k) {
     var currentIndex = 0;
     var len = numbers.length;
@@ -10,4 +11,10 @@ function solution(numbers, k) {
         }
     }
     return numbers[currentIndex];
+}
+*/
+
+// 쉬운 풀이
+function solution(numbers, k) {
+    return numbers[(--k*2) % numbers.length]
 }
