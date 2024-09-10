@@ -3,8 +3,9 @@ function solution(m, n, startX, startY, balls) {
     const map = [m, n];
     const start = [startX, startY];
     const len = balls.length;
+
     for (let i = 0; i < len; i++) {
-        // 위로 박을 때, x는 차이 제곱 & Y는 윗 벽과의 차이 * 2의 제곱
+        // 위로 쿠션: X는 두 공의 차이 제곱 + Y는 각 공의 윗 벽과의 차이를 더한 값의 제곱
         var up = (start[0] - balls[i][0]) ** 2 + ((map[1] - start[1]) + (map[1] - balls[i][1])) ** 2
         // 아래
         var down = (start[0] - balls[i][0]) ** 2 + (start[1] + balls[i][1]) ** 2
@@ -14,8 +15,8 @@ function solution(m, n, startX, startY, balls) {
         var right = ((map[0] - start[0]) + (map[0] - balls[i][0])) ** 2 + (start[1] - balls[i][1]) ** 2
         
         // 쿠션이 안되는 경우를 제거한다.
-        // y가 같고 target 공의 x가 큰 경우, right는 제외
         if (startY == balls[i][1]) {
+            // y가 같을 때, target 공 위치가 startX 보다 큰 경우 오른쪽으로 가면 쿠션없이 target 공에 박음 => 즉, right는 제외
             if (startX < balls[i][0]) {
                 answer.push(Math.min(up, down, left)); 
             } else {
