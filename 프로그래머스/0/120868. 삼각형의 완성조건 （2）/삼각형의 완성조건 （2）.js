@@ -1,3 +1,4 @@
+/*
 function solution(sides) {
     var answer = [];
     
@@ -17,4 +18,12 @@ function solution(sides) {
     }
     
     return answer.length;
+}
+*/
+
+function solution(sides) {
+ // a - b < x < a + b : 이 범위 안에 들어오는 값을 찾는다.
+ // 즉, a - b + 1 ~ a + b -1 에 속해야 한다.
+ // (a + b - 1) - (a - b + 1) + 1 개 이다.
+    return 2 * Math.min(...sides) - 1;
 }
