@@ -1,25 +1,27 @@
 function solution(video_len, pos, op_start, op_end, commands) {
-    var videoLen = getTime(video_len);
-    var pos = getTime(pos);
-    var op = [getTime(op_start), getTime(op_end)];
+    var videoLen = getSec(video_len);
+    var pos = getSec(pos);
+    var op = [getSec(op_start), getSec(op_end)];
     
     pos = checkOp(pos, op);
     for (const c of commands) {
         pos = commandHandler(videoLen, pos, c, op)
     }
-    return timeToString(pos);
+    return secToString(pos);
 }
 
-function getTime(time) {
+// 문자를 초로 변경
+function getSec(time) {
     var time = time.split(":").map(t => parseInt(t))
     return time[0] * 60 + time[1] 
 }
 
-
+// 오프닝 시간대인지 확인
 function checkOp(pos, op) {
     return (op[0] <= pos && pos <= op[1]) ? op[1] : pos;
 }
 
+// 커맨드에 따라서 시간 변경
 function commandHandler(videoLen, pos, command, op) {
     const t = 10;
     
@@ -36,9 +38,10 @@ function commandHandler(videoLen, pos, command, op) {
     return pos
 }
 
-function timeToString(time) {
-    const hour = String(parseInt(time / 60)).padStart(2, "0");
-    const min = String(parseInt(time % 60)).padStart(2, "0");
+// 초를 문자열으로 변경
+function secToString(time) {
+    const min = String(parseInt(time / 60)).padStart(2, "0");
+    const sec = String(parseInt(time % 60)).padStart(2, "0");
     
-    return `${hour}:${min}`
+    return `${min}:${sec}`
 }
