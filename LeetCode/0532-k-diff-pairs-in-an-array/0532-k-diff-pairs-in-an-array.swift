@@ -1,5 +1,3 @@
-import Foundation
-
 class Solution {
     func findPairs(_ nums: [Int], _ k: Int) -> Int {
         let sorted = nums.sorted()
@@ -10,14 +8,9 @@ class Solution {
             let diff = sorted[right] - sorted[left]
             if diff == k {
                 ans.insert(sorted[right] + sorted[left])
-                left += 1
-                right += 1
-            } else if diff < k {
-                right += 1
-            } else { 
-                left += 1
-                right += left == right ? 1 : 0
             }
+            left += diff < k ? 0 : 1
+            right += diff <= k ? 1 : (left == right ? 1 : 0)
         }
 
         return ans.count
