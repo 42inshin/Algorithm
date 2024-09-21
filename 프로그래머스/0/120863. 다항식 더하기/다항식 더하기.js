@@ -1,6 +1,6 @@
 function solution(polynomial) {
     var answer = [0,0]
-    var arr = [...polynomial].filter(v => v != " ").join("").split("+");
+    var arr = polynomial.split(" + ");
     arr.forEach(v => {
         var hasX = v.indexOf("x");
         var num = +v.replace('x', '')
