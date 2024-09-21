@@ -3,10 +3,8 @@ function solution(A, B) {
     var A_temp = [...A]
     
     for (let i = 0; i < len; i++) {
-        if (A_temp.join("") == B)
-            return i;
-        var temp = A_temp.pop();
-        A_temp.unshift(temp);
+        if (A_temp.join("") == B) return i;
+        A_temp.unshift(A_temp.pop());
     }
     
     return -1;
