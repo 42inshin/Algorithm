@@ -3,14 +3,14 @@ function solution(polynomial) {
     var arr = [...polynomial].filter(v => v != " ").join("").split("+");
     arr.forEach(v => {
         var hasX = v.indexOf("x");
-        var num = v.replace('x', '')
+        var num = +v.replace('x', '')
         
         if (hasX == 0)
             answer[0] += 1;
         else if (hasX > 0) {
-            answer[0] += +num
+            answer[0] += num
         } else {
-            answer[1] += +num
+            answer[1] += num
         }
     })
     
