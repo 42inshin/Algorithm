@@ -5,14 +5,21 @@
  */
 var findPairs = function(nums, k) {
     const len = nums.length;
-    let answer = new Set();
+    let map = new Map();
+    let answer = 0;
+    
+    nums.sort((a,b) => a - b);
 
-    for (let i = 0; i < len - 1; i++) {
-        for (let j = i + 1; j < len; j++) {
-            if (Math.abs(nums[i] - nums[j]) == k)
-                answer.add([nums[i], nums[j]].sort((a,b)=> a-b).join(','));
-        }
+    for (let num of nums) {
+        map.set(num, (map.get(num) || 0) + 1)
     }
 
-    return [...answer].length;
+    for (let i of map.keys()) {
+        if (k > 0 && map.get(i+k))
+            answer++;
+        else if (k == 0 && map.get(i) > 1)
+            answer++;
+    }
+
+    return answer;
 };
