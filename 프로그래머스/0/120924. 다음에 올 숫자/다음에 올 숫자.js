@@ -1,6 +1,6 @@
 function solution(common) {
     const [a,b,c] = common;
-    const last = common.length -1;
+    const last = common[common.length -1];
     
-    return (a-b == b-c) ? common[last] + b - a : common[last] * Math.floor(b / a)
+    return (a-b == b-c) ? last + b - a : last * Math.floor(b / a)
 }
