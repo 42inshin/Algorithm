@@ -4,22 +4,23 @@
  * @return {number}
  */
 var findPairs = function(nums, k) {
-    const len = nums.length;
-    let map = new Map();
-    let answer = 0;
-    
+    let count = new Set(), l = 0, r = 1;
+
     nums.sort((a,b) => a - b);
 
-    for (let num of nums) {
-        map.set(num, (map.get(num) || 0) + 1)
+    while (r < nums.length) {
+        let diff = nums[r] - nums[l];
+        if (diff == k) {
+            count.add(nums[l] + nums[r]);
+            l++;
+            r++;
+        } else if (diff < k) {
+            r++;
+        } else {
+            l++;
+            r += (l == r) ? 1 : 0
+        }
     }
 
-    for (let i of map.keys()) {
-        if (k > 0 && map.get(i+k))
-            answer++;
-        else if (k == 0 && map.get(i) > 1)
-            answer++;
-    }
-
-    return answer;
+    return [...count].length;
 };
