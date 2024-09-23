@@ -1,4 +1,4 @@
-function solution(my_string, is_suffix) {
+function solution1(my_string, is_suffix) {
     let n = my_string.length - 1;
     let m = is_suffix.length - 1;
     
@@ -13,3 +13,5 @@ function solution(my_string, is_suffix) {
     }
     return 1;
 }
+
+const solution = (a, b) => a.endsWith(b) ? 1 : 0
