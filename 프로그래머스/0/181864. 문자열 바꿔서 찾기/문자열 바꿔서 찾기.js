@@ -3,3 +3,4 @@ function solution(myString, pat) {
     
     return +newString.includes(pat)
 }
+
