@@ -1,25 +1,21 @@
 function solution(sequence, k) {
-    var answer = [];
-    var kIndex = sequence.findIndex(a => a == k);
-    if (kIndex != -1)
-        return [kIndex,kIndex]
     let start = 0, end = 0, sum = sequence[end];
     let len = sequence.length;
+    var answer = [0, len];
     
     while (start < len && end < len) {
         if (sum < k) {
             sum += sequence[++end];
         } else if (sum > k) {
-            sum -= sequence[start];
-            start++;
+            sum -= sequence[start++];
         } else {
-            answer.push([start, end])
-            sum -= sequence[start];
-            start++;
+            var [a, b] = answer;
+            if (b - a > end - start) {
+                answer[0] = start;
+                answer[1] = end;
+            }
+            sum -= sequence[start++];
         }
     }
-    
-    answer.sort((a,b) => (a[1] - a[0]) - (b[1] - b[0]))
-    
-    return answer[0];
+    return answer;
 }
