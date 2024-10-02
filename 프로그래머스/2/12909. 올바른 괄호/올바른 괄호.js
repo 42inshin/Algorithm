@@ -1,15 +1,11 @@
 function solution(s){
     var count = 0;
-    var sign = true;
 
-    [...s].forEach(v => {
-        if (v == "(")
-            count++;
-        else
-            count--;
+    for (let v of s) {
+        (v == "(") ? count++ : count--;
         if (count < 0)
-            sign = false;
-    })
+            return false;
+    }
 
-    return sign && count == 0;
+    return count == 0;
 }
