@@ -1,11 +1,11 @@
 function solution(s){
     var count = 0;
 
-    for (let v of s) {
-        (v == "(") ? count++ : count--;
+    for (let c of s) {
+        count += (c == "(") ? 1: -1;
         if (count < 0)
             return false;
     }
 
-    return count == 0;
+    return !count;
 }
