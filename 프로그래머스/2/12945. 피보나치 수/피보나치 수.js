@@ -1,13 +1,11 @@
 function solution(n) {
-    var fibo = 0;
-    var temp1 = 0;
-    var temp2 = 1;
+    let fibo = 0, a = 0, b = 1;
     const m = 1234567;
     
-    for (let i = 2; i < n; i++) {
-        fibo = temp1 + temp2;
-        temp1 = temp2 % m;
-        temp2 = fibo % m;
+    for (let i = 2; i <= n; i++) {
+        fibo = a + b;
+        a = b % m;
+        b = fibo % m;
     }
-    return (temp1 + temp2) % m;
+    return fibo % m;
 }
