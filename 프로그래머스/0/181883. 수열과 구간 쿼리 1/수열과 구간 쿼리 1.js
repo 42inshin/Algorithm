@@ -1,9 +1,6 @@
 function solution(arr, queries) {
-    queries.map(([s, e]) => {
-        arr.forEach((v,i) => {
-            if (s <= i && i <= e)
-                arr[i] += 1;
-        })
+    queries.forEach(([s, e]) => {
+        while (s <= e) arr[s++] += 1;
     })
     
     return arr
