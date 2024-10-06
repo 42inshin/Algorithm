@@ -1,6 +1,6 @@
 # [level 2] 숫자 변환하기 - 154538 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/154538?language=c) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/154538?language=javascript) 
 
 ### 성능 요약
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 10월 06일 14:50:55
+2024년 10월 06일 15:14:32
 
 ### 문제 설명
 
