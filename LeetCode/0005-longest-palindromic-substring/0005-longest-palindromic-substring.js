@@ -4,7 +4,7 @@
  */
 var longestPalindrome = function(s) {
     // for 문을 통해서 처음부터 끝까지 갈건데, 양쪽으로 같은게 있으면 확장시켜 보자.
-    var maxStart = 0, maxLen = 0;
+    var maxStart = 0, maxEnd = 0, maxLen = 0;
 
     if (s.length == 1) return s;
 
@@ -18,20 +18,18 @@ var longestPalindrome = function(s) {
                break;
             }
         }
-        return [start + 1, end - start]
+        
+        if (end - start > maxLen) {
+            maxLen = end - start;
+            maxStart = start + 1;
+            maxEnd = end;
+        }
     }
 
     for (let i = 0; i < s.length; i++) {
-        var [start, len] = checkPal(i, i)
-        if (len > maxLen) {
-            maxLen = len;
-            maxStart = start;
-        }
-        var [start2, len2] = checkPal(i, i+1)
-        if (len2 > maxLen) {
-            maxLen = len2;
-            maxStart = start2;
-        }
+        checkPal(i, i)
+        checkPal(i, i+1)
     }
-    return s.substring(maxStart, maxStart + maxLen - 1)
+    
+    return s.substring(maxStart, maxEnd)
 };
