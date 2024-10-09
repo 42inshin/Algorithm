@@ -1,23 +1,9 @@
 function solution(n) {
-    let dp = new Array(n+1).fill(0);
-    dp[1] = 1;
-    dp[2] = 2;
+    let dp = [0,1,2];
     
     for (let i = 3; i <= n; i++) {
-        dp[i] = (dp[i - 1] + dp[i - 2]) % 1000000007;
+        dp[i] = dp[i - 1] % 1_000_000_007 + dp[i - 2] % 1_000_000_007;
     }
     
-    return dp[n];
-}
-
-function solution1(n) {
-    let dp = new Array(n+1).fill(0);
-    dp[1] = 1;
-    dp[2] = 2;
-    
-    for (let i = 3; i <= n; i++) {
-        dp[i] = dp[i - 1] % 1000000007 + dp[i - 2] % 1000000007;
-    }
-    
-    return dp[n] % 1000000007;
+    return dp[n] % 1_000_000_007;
 }
