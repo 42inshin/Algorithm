@@ -7,7 +7,7 @@ function solution(n, t, m, p) {
     // m: 게임 인원 수
     // p: 순서
     
-    for (let i = 0; i < t * m; i++) {
+    for (let i = 0; s.length < t * m; i++) {
         s += i.toString(n).toUpperCase()
     }
     
