@@ -1,5 +1,16 @@
 function solution(arr) {
-    // 최소 거듭제곱 찾기
+    let n = 1;
+    
+    while (n < arr.length)
+        n *= 2;
+    
+    while (n != arr.length)
+        arr.push(0)
+    
+    return arr;
+}
+
+function solution1(arr) {
     let n = 1;
     let len = arr.length;
     
