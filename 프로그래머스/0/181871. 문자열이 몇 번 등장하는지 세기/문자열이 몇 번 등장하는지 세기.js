@@ -1,4 +1,14 @@
 function solution(myString, pat) {
+    let count = 0;
+    
+    for (let i = 0; i <= myString.length - pat.length; i++) {
+        if (myString.slice(i, i + pat.length) == pat)
+            count++;
+    }
+    return count;
+}
+
+function solution1(myString, pat) {
     var answer = 0;
     
     for (let i = 0; i < myString.length; i++) {
