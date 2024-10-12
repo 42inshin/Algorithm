@@ -4,5 +4,5 @@ function solution(strArr) {
     strArr.forEach(v => {
         map.set(v.length, map.get(v.length) + 1 || 1);
     });
-    return Math.max(...[...map].map(v => v[1]));
+    return Math.max(...map.values());
 }
