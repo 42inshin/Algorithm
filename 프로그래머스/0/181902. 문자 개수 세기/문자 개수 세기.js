@@ -1,4 +1,4 @@
-function solution(my_string) {
+function solution1(my_string) {
     var answer = new Array(52).fill(0);
     const A = "A".charCodeAt(0);
     const a = "a".charCodeAt(0);
@@ -12,4 +12,15 @@ function solution(my_string) {
     })
     
     return answer;
+}
+
+function solution(s) {
+    var a = new Array(52).fill(0);
+    var arr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    
+    [...s].forEach(c => {
+        a[arr.indexOf(c)]++;
+    })
+    
+    return a
 }
