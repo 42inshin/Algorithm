@@ -1,4 +1,9 @@
+
 function solution(a, b) {
+    return String(BigInt(a) + BigInt(b))
+}
+
+function solution1(a, b) {
     let aArr = [...a], bArr = [...b];
     let len = aArr.length > bArr.length ? aArr.length + 1 : bArr.length + 1;
     let answer = new Array(len).fill(0);
@@ -16,4 +21,3 @@ function solution(a, b) {
     
     return String(answer.join(""))
 }
-
