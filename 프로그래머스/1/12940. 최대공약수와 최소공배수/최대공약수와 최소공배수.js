@@ -6,8 +6,8 @@ function solution(n, m) {
 
 function gcd(n, m) {
     let [big, small] = [n, m];
-    if (n < m)
-        [big, small] = [small, big]
+    // if (n < m)
+    //     [big, small] = [small, big]
     
     while (small > 0) {
         let r = big % small;
