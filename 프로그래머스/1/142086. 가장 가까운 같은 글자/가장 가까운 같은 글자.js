@@ -1,4 +1,11 @@
 function solution(s) {
+    return [...s].map((char, i) => {
+        var count = s.slice(0, i).lastIndexOf(char);
+        return count == -1 ? count : i - count;
+    })
+}
+    
+function solution1(s) {
     var answer = [];
     
     for (let i = 0; i < s.length; i++) {
