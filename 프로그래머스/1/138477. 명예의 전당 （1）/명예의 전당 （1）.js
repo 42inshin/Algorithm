@@ -1,10 +1,10 @@
 function solution(k, score) {
-    var temp = [];
+    var topRank = [];
     var answer = [];
     
     for (let i = 0; i < score.length; i++) {
-        temp.push(score[i]);
-        var topRank = temp.sort((a,b) => b - a).slice(0, k)
+        topRank.push(score[i]);
+        topRank = topRank.sort((a,b) => b - a).slice(0, k)
         answer.push(topRank[topRank.length - 1])
     }
     
