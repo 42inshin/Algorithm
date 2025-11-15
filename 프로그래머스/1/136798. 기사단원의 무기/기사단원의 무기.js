@@ -9,12 +9,10 @@ function getDivisor(n) {
 }
 
 function solution(number, limit, power) {
-    let num = number;
-    var answer = 0;
-    let count = 0;
+    let answer = 0;
     
-    for (let i = 1; i <= num; i++) {
-        count = getDivisor(i)
+    for (let i = 1; i <= number; i++) {
+        let count = getDivisor(i)
         answer += count > limit ? power : count;
     }
     
