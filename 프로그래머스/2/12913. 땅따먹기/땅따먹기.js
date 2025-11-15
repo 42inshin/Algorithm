@@ -1,9 +1,10 @@
 function solution(land) {
     for (let i = 1; i < land.length; i++) {
-        land[i][0] += Math.max(land[i - 1][1], land[i - 1][2], land[i - 1][3])
-        land[i][1] += Math.max(land[i - 1][0], land[i - 1][2], land[i - 1][3])
-        land[i][2] += Math.max(land[i - 1][0], land[i - 1][1], land[i - 1][3])
-        land[i][3] += Math.max(land[i - 1][0], land[i - 1][1], land[i - 1][2])
+	    const [a,b,c,d] = land[i - 1]
+	    land[i][0] += Math.max(b,c,d);
+	    land[i][1] += Math.max(a,c,d);
+	    land[i][2] += Math.max(a,b,d);
+        land[i][3] += Math.max(a,b,c);	    
     }
-    return Math.max(...land[land.length -1])
+    return Math.max(...land.at(-1))
 }
