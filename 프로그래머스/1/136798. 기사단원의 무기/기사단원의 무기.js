@@ -1,19 +1,9 @@
 function getDivisor(n) {
-    let num = n;
-    let count = 1;
+    let count = 0;
     
-    for (let i = 2; i <= num; i++) {
-        let exp = 0;
-        while (num % i == 0) {
-            num /= i;
-            exp++;
-        }
-        if (exp > 0) {
-            count *= exp + 1;
-        }
-    }
-    if (num > 1) {
-        count *= 2;
+    for (let i = 1; i * i <= n; i++) {
+        if (i * i == n) count++;
+        else if (n % i == 0) count += 2;
     }
     return count;
 }
