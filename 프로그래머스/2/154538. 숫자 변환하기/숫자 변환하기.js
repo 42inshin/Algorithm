@@ -1,33 +1,18 @@
 function solution(x, y, n) {
-    let arr = new Array(y+1).fill(-1);
-    arr[x] = 0;
+    if (x === y) return 0;
     
-    for (let i = x; i <= y; i++) {
-        if (arr[i] == -1)
-            continue;
-        // x + n
-        if (i+n <= y) {
-            if (arr[i+n] == -1)
-                arr[i+n] = arr[i] + 1
-            else
-                arr[i+n] = Math.min(arr[i] + 1, arr[i+n])
-        }
-            
-        // x * 2
-        if (i*2 <= y) {
-            if (arr[i*2] == -1)
-                arr[i*2] = arr[i] + 1
-            else
-                arr[i*2] = Math.min(arr[i] + 1, arr[i*2])
-        }
-        // x * 3
-        if (i*3 <= y) {
-            if (arr[i*3] == -1)
-                arr[i*3] = arr[i] + 1
-            else
-                arr[i*3] = Math.min(arr[i] + 1, arr[i*3])
-        }
+    const dp = Array(y + 1).fill(0);
+    
+    for (let i = x; i < y + 1; i++) {
+        if (dp[i] == 0 && i != x) continue;
+        
+        if (i + n < y + 1)
+            dp[i + n] = Math.min(dp[i + n] !== 0 ? dp[i + n] : dp[i] + 1, dp[i] + 1);
+        if (i * 2 < y + 1)
+            dp[i * 2] = Math.min(dp[i * 2] !== 0 ? dp[i * 2] : dp[i] + 1, dp[i] + 1);
+        if (i * 3 < y + 1)
+            dp[i * 3] = Math.min(dp[i * 3] !== 0 ? dp[i * 3] : dp[i] + 1, dp[i] + 1);
     }
-    console.log(arr)
-    return arr[y];
+    
+    return dp[y] == 0 ? -1 : dp[y] 
 }
