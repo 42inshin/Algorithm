@@ -31,9 +31,9 @@ function solution(fees, records) {
         if (INOUT === "IN") {
             if (i + 1 <= records.length - 1) {
                 const [nextHHMM, nextCarNum, nextINOUT] = records[i + 1].split(" ");
-                if (carNum === nextCarNum && INOUT === "IN" && nextINOUT === "OUT") {
+                if (carNum === nextCarNum && nextINOUT === "OUT") {
                     cars[carNum] = (cars[carNum] || 0) + convertHHMMtoMin(nextHHMM) - convertHHMMtoMin(HHMM);
-                } else if (INOUT === "IN") {
+                } else {
                     cars[carNum] = (cars[carNum] || 0) + convertHHMMtoMin(lastHHMM) - convertHHMMtoMin(HHMM);    
                 }
             } else {
