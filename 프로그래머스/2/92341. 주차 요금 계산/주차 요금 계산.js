@@ -14,38 +14,20 @@ const convertHHMMtoMin = (HHMM) => {
 
 function solution(fees, records) {
     const [defaultTime, defaultFee, unitTime, unitFee] = fees;
-    const lastHHMM = "23:59";
-    
-    // 차량별 누적 주차 시간 계산
+    const lastOutTime = convertHHMMtoMin("23:59");
     const cars = {};
-    
-    records.sort((a, b) => {
-        const aArr = a.split(' ');
-        const bArr = b.split(' ');
-        return Number(aArr[1]) - Number(bArr[1]);
-    })
     
     for (let i= 0; i < records.length; i++) {
         const [HHMM, carNum, INOUT] = records[i].split(" ");
-        // 차량 번호 추가
-        if (INOUT === "IN") {
-            if (i + 1 <= records.length - 1) {
-                const [nextHHMM, nextCarNum, nextINOUT] = records[i + 1].split(" ");
-                if (carNum === nextCarNum && nextINOUT === "OUT") {
-                    cars[carNum] = (cars[carNum] || 0) + convertHHMMtoMin(nextHHMM) - convertHHMMtoMin(HHMM);
-                } else {
-                    cars[carNum] = (cars[carNum] || 0) + convertHHMMtoMin(lastHHMM) - convertHHMMtoMin(HHMM);    
-                }
-            } else {
-                cars[carNum] = (cars[carNum] || 0) + convertHHMMtoMin(lastHHMM) - convertHHMMtoMin(HHMM);
-            }
-        }    
+        const accTime = (INOUT === "IN" ? -1 : 1) * convertHHMMtoMin(HHMM)
+        cars[carNum] = (cars[carNum] || 0) + accTime;
     }
     
     const carsValue = Object.keys(cars).sort().map(key => cars[key]);
-    const result = carsValue.map((parkedTime) => {
-        const time = parkedTime - defaultTime < 0 ? 0 : parkedTime - defaultTime
-        return defaultFee + Math.ceil((time / unitTime)) * unitFee
+    const result = carsValue.map((t) => {
+        const parkedTime = t > 0 ? t : t + lastOutTime;
+        const netTime = parkedTime - defaultTime < 0 ? 0 : parkedTime - defaultTime
+        return defaultFee + Math.ceil((netTime / unitTime)) * unitFee
     })
     return result
 }
