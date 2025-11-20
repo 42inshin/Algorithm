@@ -1,13 +1,12 @@
 function solution(n) {
     const dp = [0, 1, 2];
-    const numOfCase = 1_000_000_007
+    const num = 1_000_000_007
     
     for (let i = 3; i <= n; i++) {
-        dp[i] = (dp[i - 1] + dp[i - 2]) % numOfCase
+        dp[i] = (dp[i - 1] + dp[i - 2]) % num
     }
-    return dp[n];
+    return dp.at(-1);
 }
-
 
 // function solution(n) {
 //     let dp = [0,1,2];
