@@ -1,6 +1,7 @@
 function solution(numbers) {
     var nString = numbers.map(v => String(v))
     var answer = nString.sort((a,b) => {
+        // console.log(a + b, b + a)
         if (a + b > b + a) return -1;
         if (a + b < b + a) return 1;
         return 0;
