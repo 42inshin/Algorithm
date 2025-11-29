@@ -6,7 +6,7 @@ function solution(s) {
         let temp = s.split("").filter(v => v != "0").join("");
         answer[1] += s.length - temp.length
         // 이진 변환
-        s = Number(temp.length).toString(2);
+        s = temp.length.toString(2);
         answer[0] += 1;
     }
     return answer;
