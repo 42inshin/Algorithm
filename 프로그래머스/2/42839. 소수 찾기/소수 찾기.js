@@ -1,47 +1,38 @@
-function solution(numbers) {
-    const arr = getAllNumbers(numbers)
-    let count = 0;
-    
-    for (let n of arr) {
-        if (isPrime(n))
-            count++;
+const isPrime = (n) => {
+    for (let i = 2; i <= Math.sqrt(n); i++) {
+        if (n % i == 0) return false;
     }
-    return count;
+    return n > 1;
 }
 
-function getAllNumbers(n) {
-    const digits = n.split("")
+const getPermutations = (n) => {
+    const digits = n.split("");
     const used = Array(digits.length).fill(false);
     const resultSet = new Set();
     
-    function dfs(cur) {
-        if (digits.length > 0) {
-            resultSet.add(Number(cur));
-        }
-        
-        if (cur.length === digits.length) return ;
+    const dfs = (cur) => {
+        if (cur.length) resultSet.add(parseInt(cur))
+        if (cur.length == digits.length) return;
         
         for (let i = 0; i < digits.length; i++) {
             if (used[i]) continue;
-            
             used[i] = true;
             dfs(cur + digits[i]);
             used[i] = false;
         }
     }
+    
     dfs("");
-    return [...resultSet];
+    
+    return [...resultSet]
 }
 
-function isPrime(n) {
-    if (n < 2) return false;
-    if (n == 2) return true;
-    if (n % 2 === 0) return false;
-    
-    let i = 3;
-    while (i <= Math.sqrt(n)) {
-        if (n % i === 0) return false;
-        i++;
+function solution(numbers) {
+    const all = getPermutations(numbers);
+    let count = 0;
+    for (let n of all) {
+        if (isPrime(n)) count++;
     }
-    return true;
+    return count;
 }
+
