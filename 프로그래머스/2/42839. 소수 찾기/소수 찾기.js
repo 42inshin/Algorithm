@@ -1,11 +1,12 @@
 function solution(numbers) {
-    var answer = 0;
-    
     const arr = getAllNumbers(numbers)
+    let count = 0;
+    
     for (let n of arr) {
-        answer += isPrime(n) ? 1 : 0;
+        if (isPrime(n))
+            count++;
     }
-    return answer;
+    return count;
 }
 
 function getAllNumbers(n) {
