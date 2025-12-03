@@ -8,16 +8,16 @@ function solution(bridge_length, weight, truck_weights) {
     
     while (truck_weights.length > 0 || q.length > 0) {
         // 다리 건너기
-        if (q[0][1] == time) weight_on_bridge -= q.shift()[0];
+        if (q[0][1] === time) weight_on_bridge -= q.shift()[0];
         
         // 대기 트럭 다리 건널수 있는지 확인
         if (weight_on_bridge + truck_weights[0] <= weight) {
             weight_on_bridge += truck_weights[0];
             q.push([truck_weights.shift(), time + bridge_length]);
-        } 
-        // else {
-        //     time = q[0][1] - 1;
-        // }
+        } else {
+            // 가장 먼저 다리를 통과할 트럭의 시간으로 점프
+            if (q[0]) time = q[0][1] - 1;
+        }
         
         time++;
     }
