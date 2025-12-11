@@ -1,6 +1,5 @@
 function solution(k, tangerine) {
     var answer = 0;
-    
     const c = new Map();
     
     for (let n of tangerine) {
@@ -9,8 +8,7 @@ function solution(k, tangerine) {
     const arr = [...c.values()].sort((a,b) => a - b);
     
     while (k > 0) {
-        let a = arr.pop();
-        k -= a;
+        k -= arr.pop();
         answer++;
     }
     
