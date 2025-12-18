@@ -1,9 +1,9 @@
 const makeTree = (n, wires) => {
     const tree = Array(n + 1).fill().map(() => [])
     
-    for (let [n, m] of wires) {
-        tree[n].push(m);
-        tree[m].push(n);
+    for (let [v1, v2] of wires) {
+        tree[v1].push(v2);
+        tree[v2].push(v1);
     }
     return tree;
 }
