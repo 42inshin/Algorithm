@@ -1,0 +1,26 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	const numbers = []
+	
+	for await (const line of rl) {
+		numbers.push(...line.split(" ").map(Number));
+		rl.close();
+	}
+
+	if (numbers.some(isNaN) || numbers.length !== 2) {
+		process.exit();
+	}
+
+	// 로직
+	const getGcd = (a, b) => b === 0 ? a : getGcd(b, a % b);
+
+	const a = numbers[0];
+	const b = numbers[1];
+	const gcd = getGcd(a, b);
+
+	console.log(`${a/gcd}:${b/gcd}`)	
+	process.exit();
+})();
