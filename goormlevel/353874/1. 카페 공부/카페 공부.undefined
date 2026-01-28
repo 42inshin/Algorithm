@@ -1,0 +1,76 @@
+// Run by Node.js
+import * as readline from 'readline';
+
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	let input = [];
+	
+	for await (const line of rl) {
+		const trimLine = line.trim();
+		
+		if (trimLine !== line) break;
+
+		const numbers = trimLine.split(' ').map(Number);
+
+		if (numbers.some(isNaN)) break;
+		
+		input.push(numbers);
+		
+		if (input.length === 3) {
+			rl.close();
+			break;
+		}
+	}
+
+	// 데이터 부족 시 예외 처리
+	if (input.length < 3) {
+		console.log("-")
+		process.exit();
+	}
+	
+	const [N, M] = input[0]; // 책상 크기
+	const [R1, C1] = input[1]; // 구름이 노트
+	const [R2, C2] = input[2]; // 친구 노트
+
+	// 배치가 가능한지 확인하는 함수
+	function check(h, w, r1, c1, r2, c2) {
+		// 1. 가로로 나란히 배치하는 경우
+		if (Math.max(r1, r2) <= h && (c1 + c2) <= w) return true;
+		// 2. 세로로 나란히 배치하는 경우
+		if ((r1 + r2) <= h && Math.max(c1, c2) <= w) return true;
+		return false;
+	}
+
+	let possible = false;
+
+	// 책상의 방향 (N, M) 또는 (M, N)
+	for (let [h, w] of [[N, M], [M, N]]) {
+		// 첫 번째 노트의 회전 (R1, C1) 또는 (C1, R1)
+		for (let [r1, c1] of [[R1, C1], [C1, R1]]) {
+			// 두 번째 노트의 회전 (R2, C2) 또는 (C2, R2)
+			for (let [r2, c2] of [[R2, C2], [C2, R2]]) {
+				if (check(h, w, r1, c1, r2, c2)) {
+					possible = true;
+					break;
+				}
+			}
+			if (possible) break;
+		}
+		if (possible) break;
+	}
+
+	console.log(possible ? "YES" : "NO");
+	process.exit();
+})();
+
+// (async () => {
+// 	let rl = readline.createInterface({ input: process.stdin });
+	
+// 	for await (const line of rl) {
+// 		console.log('Hello World! Your input is', line);
+// 		rl.close();
+// 	}
+	
+// 	process.exit();
+// })();
