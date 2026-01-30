@@ -1,0 +1,30 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	let input = [];
+	
+	for await (const line of rl) {
+		if (!line) {
+			rl.close();
+			break;
+		} 
+		const numbers = line.split(" ").map(Number)
+		if (numbers.length == 2) input.push(numbers);
+	}
+
+	function solution() {
+		if (input.length < 3) return "YES"
+		
+		const [x1, y1] = input[0];
+		const [x2, y2] = input[1];
+		const [x3, y3] = input[2];
+	
+		if ((y2 - y1) * (x3 - x2) !== (y3 - y2) * (x2 - x1)) return "NO";
+		return "YES"
+	}
+
+	console.log(solution());
+	process.exit();
+})();
