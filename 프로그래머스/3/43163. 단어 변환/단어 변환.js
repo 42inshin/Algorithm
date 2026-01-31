@@ -28,6 +28,7 @@ function isOneChange(cur, next) {
     
     for (let i = 0; i < cur.length; i++) {
         if (cur[i] !== next[i]) count++;
+        if (count > 1) return false;
     }
     
     return count === 1 ? true : false;
