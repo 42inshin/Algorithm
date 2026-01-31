@@ -1,0 +1,63 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	// 섬 개수
+	let N = -1;
+	// 다리 개수
+	let M = -1;
+	// 사람 수 배열
+	let people = [];
+	// 다리 연결 
+	let bridge = [];
+	
+	for await (const line of rl) {
+		const trimed = line.trim();
+		if (!trimed) break;
+
+		const numbers = trimed.split(" ").map(Number);
+		if (numbers.some(isNaN)) break;
+
+		if (N == -1) {
+			if (numbers.length != 2) break;
+			[N, M] = numbers;
+		} else if (!people.length) {
+			if (N !== numbers.length) break;
+			people = [...numbers];
+		} else {
+			if (numbers.length != 2) break;
+			bridge.push(numbers);
+		}
+	}
+	rl.close();
+
+	if (N === -1 || M === -1 || people.length !== N || bridge.length !== M) {
+		console.log("-");
+		return;
+	}
+
+	// 로직
+	// 1번 섬
+	const stack = [1]
+	let sum = 0;
+	const visited = new Array(N).fill(false);
+	
+	while (stack.length) {
+		let islandNum = stack.shift()
+		let index = islandNum - 1;
+		
+		if (visited[index]) continue;
+		
+		visited[index] = true;
+		sum += people[index];
+
+		for (let line of bridge) {
+			const [x, y] = line;
+			if (x == islandNum) stack.push(y)
+			if (y == islandNum) stack.push(x)
+		}
+	}
+	console.log(sum);
+	process.exit();
+})();
