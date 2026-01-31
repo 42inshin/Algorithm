@@ -1,0 +1,57 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	let n = -1;
+	let m = -1;
+	let people = [];
+	const bridge = [];
+	
+	for await (const line of rl) {
+		const trimed = line.trim();
+		if (!trimed) break;
+		
+		const numbers = trimed.split(" ").map(Number);
+		if (numbers.some(isNaN)) break;
+
+		if (n === -1) {
+			if (numbers.length !== 2) break;
+			[n, m] = numbers;
+		} else if (!people.length) {
+			if (numbers.length !== n) break;
+			people = [...numbers];
+		} else {
+			bridge.push(numbers);
+		}
+	}
+	rl.close();
+
+	if (n === -1 || m === -1 || people.length !== n || bridge.length !== m) {
+		console.log("-");
+		return;
+	}
+
+	// 로직
+	// 섬 번호, 다리 건넌 횟수
+	const stack = [[1, 0]];
+	let cost = 0;
+	const visited = new Array(n).fill(false);
+
+	while (stack.length) {
+		const [islandNum, count] = stack.shift();
+		let i = islandNum - 1;
+		
+		if (visited[i]) continue;
+		visited[i] = true;
+		cost += people[i] * count;
+
+		for (let line of bridge) {
+			if (islandNum === line[0]) stack.push([line[1], count + 1]);
+			if (islandNum === line[1]) stack.push([line[0], count + 1]);
+		}
+	}
+	
+	console.log(cost);
+	process.exit();
+})();
