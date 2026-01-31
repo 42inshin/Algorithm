@@ -1,0 +1,48 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	const input = [];
+	let J = 0;
+	let N = -1;
+	for await (const line of rl) {
+		const trimed = line.trim();
+		
+		if (!trimed || trimed !== line) {
+			rl.close();
+			break;
+		}
+
+		const numbers = trimed.split(" ").map(Number);
+
+		if (numbers.some(isNaN) || numbers.length !== 2) break;
+
+		const [a, b] = numbers;
+		if (N === -1) {
+			J = a;
+			N = b;
+		} else {
+			input.push(a * b);
+		}
+	}
+
+	if (input.length !== N) {
+		console.log("-");
+		process.exit();	
+	}
+
+	// 구현
+	input.sort((a,b) => b - a);
+
+	for (let i = 0; i < N; i++) {
+		J -= input[i];
+		
+		if (J <= 0) {
+			console.log(i + 1)
+			break;
+		}
+	}
+	if (J > 0) console.log(-1)
+	process.exit();
+})();
