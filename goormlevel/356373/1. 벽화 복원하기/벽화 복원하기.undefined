@@ -1,0 +1,35 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+
+	let K = "";
+	
+	for await (const line of rl) {
+		K = line.trim().toString();
+		rl.close();
+	}
+
+	let n = 1;
+	let str = "1";
+	let index = -1;
+	const queue = K.split("");
+	
+	for (let i = index + 1; i < str.length; i++) {
+		if (queue.length == 0) break;
+		const num = queue[0];
+		
+		if (str[i] === num) {
+			index = i;
+			queue.shift();
+		} 
+		if (queue.length && i == str.length - 1) {
+			str += String(++n);	
+		}
+	}
+
+	console.log(n);
+	
+	process.exit();
+})();
