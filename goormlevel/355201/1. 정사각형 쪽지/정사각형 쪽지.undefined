@@ -1,0 +1,31 @@
+// Run by Node.js
+const readline = require('readline');
+
+(async () => {
+	let rl = readline.createInterface({ input: process.stdin });
+	let w = -1;
+	let h = -1;
+	
+	for await (const line of rl) {
+		if (!line.trim()) break;
+		
+		const numbers = line.trim().split(" ").map(Number);
+		
+		if (numbers.length !== 2) break;
+		[w, h] = numbers;
+	}
+		rl.close();
+
+	if (w === -1 || h === -1) {
+		return;
+	}
+
+	const a = Math.min(w / 3, h);
+	const b = Math.min(w, h / 3);
+	const c = Math.min(w / 2, h / 2);
+  
+	const s = Math.max(a, b, c)
+
+	console.log(Math.floor(6 * s)); // 넓이가 아닌 너비(가로 길이)를 말하는 거였음 - 문제가 상당히 이상함.
+	process.exit();  
+})();
